@@ -1,0 +1,29 @@
+{
+  "disease": "ckd",
+  "model_type": "Global Federated Chronic Kidney Disease (CKD) Model (FedAvg)",
+  "hospitals": [
+    "Hospital A",
+    "Hospital B",
+    "Hospital C"
+  ],
+  "num_clients": 3,
+  "rounds": 5,
+  "local_epochs": 5,
+  "test_samples": 80,
+  "accuracy": 0.95,
+  "precision": 0.95,
+  "recall": 1.0,
+  "f1": 0.9744,
+  "roc_auc": 1.0,
+  "log_loss": 0.0974,
+  "confusion_matrix": [
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      76
+    ]
+  ]
+}

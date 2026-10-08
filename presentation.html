@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Federated Disease Prediction System - Presentation</title>
+<style>
+  :root {
+    --navy: #1a365d;
+    --teal: #0e7490;
+    --slate: #334155;
+    --light-bg: #f8fafc;
+    --card-border: #e2e8f0;
+    --accent: #0284c7;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  body { background: #0f172a; color: var(--slate); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; overflow-x: hidden; }
+  
+  .controls-bar {
+    width: 960px; max-width: 95vw; display: flex; justify-content: space-between; align-items: center; padding: 12px 0; color: #cbd5e1;
+  }
+  .controls-bar button, .controls-bar a {
+    background: #1e293b; color: #f1f5f9; border: 1px solid #334155; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; text-decoration: none; font-size: 14px; transition: all 0.2s;
+  }
+  .controls-bar button:hover, .controls-bar a:hover { background: var(--teal); border-color: var(--teal); }
+  
+  .slide-container {
+    width: 960px; height: 540px; max-width: 95vw; max-height: calc(95vw * 9 / 16);
+    background: var(--white); border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    position: relative; overflow: hidden; display: none; padding: 36px 44px;
+  }
+  .slide-container.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+  
+  .slide-category { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: var(--teal); text-transform: uppercase; margin-bottom: 6px; }
+  .slide-title { font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 22px; line-height: 1.2; }
+  
+  .dark-slide { background: var(--navy); color: #f8fafc; }
+  .dark-slide .slide-category { color: #38bdf8; }
+  .dark-slide .slide-title { color: #ffffff; }
+  
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; }
+  
+  .card { background: var(--light-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 18px; }
+  .card-highlight { background: #f0fdfa; border: 1.5px solid var(--teal); }
+  .card h3 { font-size: 16px; color: var(--navy); margin-bottom: 10px; font-weight: 700; }
+  .card ul { list-style: none; }
+  .card li { font-size: 12px; line-height: 1.45; color: var(--slate); margin-bottom: 8px; position: relative; padding-left: 14px; }
+  .card li::before { content: "•"; position: absolute; left: 0; color: var(--teal); font-weight: bold; }
+  .card-highlight li::before { content: "✔"; color: var(--teal); }
+  
+  .metric-table { width: 100%; border-collapse: collapse; font-size: 11.5px; margin-top: 4px; }
+  .metric-table th, .metric-table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+  .metric-table th { background: var(--navy); color: white; font-weight: 600; }
+  .metric-table tr:nth-child(even) { background: #f8fafc; }
+  
+  .formula-box { background: #f1f5f9; border-left: 4px solid var(--teal); padding: 14px 20px; border-radius: 4px; margin-bottom: 16px; }
+  .formula-box code { font-size: 20px; font-weight: bold; color: var(--navy); }
+  
+  .slide-img { width: 100%; height: auto; max-height: 330px; object-fit: contain; border-radius: 6px; border: 1px solid #e2e8f0; }
+  
+  .slide-footer { position: absolute; bottom: 14px; left: 44px; right: 44px; display: flex; justify-content: space-between; font-size: 11px; color: #94a3b8; }
+  
+  @media print {
+    body { background: white; }
+    .controls-bar { display: none; }
+    .slide-container { display: block !important; page-break-after: always; width: 100%; height: 100vh; box-shadow: none; border-radius: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="controls-bar">
+  <div>
+    <button onclick="prevSlide()">◀ Previous</button>
+    <button onclick="nextSlide()">Next ▶</button>
+    <span style="margin-left: 14px; font-size: 14px;" id="slideCounter">Slide 1 / 12</span>
+  </div>
+  <div>
+    <a href="Federated_Disease_Prediction_Presentation.pptx" download>📥 Download .pptx</a>
+    <button onclick="window.print()" style="margin-left: 8px;">🖨️ Print / Save as PDF</button>
+  </div>
+</div>
+
+<!-- SLIDE 1 -->
+<div class="slide-container dark-slide active" id="slide-1">
+  <div class="slide-category">Final-Year Academic Capstone Project</div>
+  <div class="slide-title" style="font-size: 34px; margin-top: 20px; line-height: 1.2;">
+    Federated Learning-Based<br>Disease Prediction System
+  </div>
+  <p style="font-size: 16px; color: #93c5fd; margin-bottom: 40px;">
+    Privacy-Preserving Collaborative Machine Learning for Cardiovascular Risk Assessment
+  </p>
+  <div style="background: rgba(255,255,255,0.08); padding: 18px 24px; border-radius: 8px; border-left: 4px solid #38bdf8;">
+    <p style="font-size: 13px; color: #e2e8f0; font-weight: 600;">Technology Stack & Architecture:</p>
+    <p style="font-size: 12px; color: #cbd5e1; margin-top: 4px;">Python 3.11 • Scikit-Learn • Flower (flwr) • Streamlit • Sample-Weighted FedAvg • 3 Simulated Hospital Clients</p>
+  </div>
+  <div class="slide-footer">
+    <span>Academic Engineering Prototype</span>
+    <span>Slide 1 / 12</span>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide-container" id="slide-2">
+  <div class="slide-category">Problem Statement</div>
+  <div class="slide-title">The Healthcare Data Dilemma</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Centralized ML Challenges</h3>
+      <ul>
+        <li><strong>Siloed Patient Records:</strong> Data is isolated across hospitals with restricted external access.</li>
+        <li><strong>Regulatory Compliance:</strong> HIPAA and GDPR prohibit uninhibited sharing of identifiable records.</li>
+        <li><strong>Vulnerable Single Point of Failure:</strong> Central data warehouses attract high-risk cyber attacks.</li>
+        <li><strong>Data Sovereignty:</strong> Institutions refuse pooling due to legal liabilities and governance conflicts.</li>
+      </ul>
+    </div>
+    <div class="card card-highlight">
+      <h3 style="color: var(--teal);">The Federated Solution</h3>
+      <ul>
+        <li><strong>Decentralized Data Custody:</strong> Patient records never leave local hospital firewall boundaries.</li>
+        <li><strong>Collaborative Training:</strong> Hospitals train local models on internal records independently.</li>
+        <li><strong>Parameter Exchange:</strong> Only mathematical weights (coef_, intercept_) are transmitted.</li>
+        <li><strong>Sample-Weighted FedAvg:</strong> Coordinator aggregates updates proportionally to client sample sizes.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Federated Learning-Based Disease Prediction System</span>
+    <span>Slide 2 / 12</span>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide-container" id="slide-3">
+  <div class="slide-category">Architecture</div>
+  <div class="slide-title">System Architecture & Federated Workflow</div>
+  <div class="grid-4" style="margin-top: 10px;">
+    <div class="card">
+      <h3>1. Data Isolation</h3>
+      <p style="font-size: 11px; color: var(--slate); line-height: 1.4;">3 distinct hospital data folders (client_1, client_2, client_3). No cross-access.</p>
+    </div>
+    <div class="card">
+      <h3>2. Local Training</h3>
+      <p style="font-size: 11px; color: var(--slate); line-height: 1.4;">Clients receive global weights, train for 5 local epochs on internal patient records.</p>
+    </div>
+    <div class="card">
+      <h3>3. Weight Uplink</h3>
+      <p style="font-size: 11px; color: var(--slate); line-height: 1.4;">Only numerical weight arrays and sample count (n_k) are uploaded. Zero CSV rows transmitted.</p>
+    </div>
+    <div class="card">
+      <h3>4. Server FedAvg</h3>
+      <p style="font-size: 11px; color: var(--slate); line-height: 1.4;">Central Flower server executes sample-weighted FedAvg and evaluates on held-out test data.</p>
+    </div>
+  </div>
+  <div style="margin-top: 20px; background: #e0f2fe; padding: 12px 18px; border-radius: 6px; font-size: 12px; color: #0369a1; font-weight: 600;">
+    Principle: Server coordinates model aggregation blindly without access to client filesystems or raw clinical data.
+  </div>
+  <div class="slide-footer">
+    <span>Federated Learning-Based Disease Prediction System</span>
+    <span>Slide 3 / 12</span>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide-container" id="slide-4">
+  <div class="slide-category">Data Preprocessing</div>
+  <div class="slide-title">Clinical Dataset & Leakage-Free Preprocessing</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>UCI Heart Disease Dataset</h3>
+      <ul>
+        <li><strong>Cohort Size:</strong> 303 de-identified patient instances.</li>
+        <li><strong>Binary Target:</strong> 0 = No Disease, 1 = Heart Disease Present.</li>
+        <li><strong>13 Clinical Features:</strong> Age, Sex, CP, Blood Pressure, Cholesterol, FBS, RestECG, Max Heart Rate, ExAngina, Oldpeak, Slope, CA, Thal.</li>
+        <li><strong>Split:</strong> 80% Train (242 samples for clients), 20% Held-Out Test (61 samples).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Leakage-Free Pipeline</h3>
+      <ul>
+        <li><strong>Fit-Only-On-Train:</strong> ColumnTransformer fitted solely on training split; test set is only transformed.</li>
+        <li><strong>StandardScaler:</strong> Z-score standardization for continuous numerical biomarkers.</li>
+        <li><strong>OneHotEncoder:</strong> Expands categorical features to 30 encoded dimensions.</li>
+        <li><strong>Persisted Preprocessor:</strong> Saved to <code>preprocessor.joblib</code> for Streamlit inference.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Federated Learning-Based Disease Prediction System</span>
+    <span>Slide 4 / 12</span>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide-container" id="slide-5">
+  <div class="slide-category">Mathematical Formulation</div>
+  <div class="slide-title">Federated Averaging (FedAvg) Formulation</div>
+  <div class="formula-box">
+    <code>W_{t+1} = ∑_{k=1}^K  ( n_k / N )  W_{t+1}^k</code>
+    <p style="font-size: 11px; color: var(--slate); margin-top: 6px;">Where K = 3 clients, n_k = local sample size, N = total samples (242), and W = [coefficients, intercept].</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Why Sample-Count Weighting?</h3>
+      <ul>
+        <li>Prevents small diagnostic clinics from skewing weights against large hospitals.</li>
+        <li>Matches the mathematical objective of centralized empirical risk minimization.</li>
+        <li>Formally tested in <code>test_fedavg_synthetic_weighted_average</code>.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Warm-Start Optimization</h3>
+      <ul>
+        <li>Clients initialize local LogisticRegression directly from incoming global weights.</li>
+        <li>5 local optimization epochs performed before sending parameter updates.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Federated Learning-Based Disease Prediction System</span>
+    <span>Slide 5 / 12</span>
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide-container" id="slide-6">
+  <div class="slide-category">Methodology</div>
+  <div class="slide-title">Controlled Experimental Setup</div>
+  <table class="metric-table" style="margin-top: 15px;">
+    <thead>
+      <tr>
+        <th>Experimental Attribute</th>
+        <th>Centralized ML Baseline</th>
+        <th>Federated ML (FedAvg)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Data Custody</strong></td><td>All 242 records pooled on central server</td><td>Isolated across 3 client folders</td></tr>
+      <tr><td><strong>Raw Records Transmitted</strong></td><td>Yes (100% pooled)</td><td>Zero (0 records sent)</td></tr>
+      <tr><td><strong>Model Architecture</strong></td><td>Logistic Regression (L-BFGS)</td><td>Logistic Regression (Warm-start)</td></tr>
+      <tr><td><strong>Orchestration</strong></td><td>Single centralized execution</td><td>5 rounds via Flower (flwr)</td></tr>
+      <tr><td><strong>Held-Out Test Set</strong></td><td>61 unseen patient records</td><td>Identical 61 unseen records</td></tr>
+      <tr><td><strong>Feature Representation</strong></td><td>Identical 30 transformed features</td><td>Identical 30 transformed features</td></tr>
+    </tbody>
+  </table>
+  <div class="slide-footer">
+    <span>Federated Learning-Based Disease Prediction System</span>
+    <span>Slide 6 / 12</span>
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide-container" id="slide-7">
+  <div class="slide-category">Results</div>
+  <div class="slide-title">Experimental Results & Comparison</div>
+  <div class="grid-2">
+    <div>
+      <table class="metric-table">
+        <thead>
+          <tr><th>Metric</th><th>Centralized</th><th>Federated</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Accuracy</strong></td><td><strong>86.89%</strong></td><td><strong>85.25%</strong></td></tr>
+          <tr><td><strong>Precision</strong></td><td>85.71%</td><td>85.29%</td></tr>
+          <tr><td><strong>Recall (Sensitivity)</strong></td><td>90.91%</td><td>87.88%</td></tr>
+          <tr><td><strong>F1-Score</strong></td><td>88.24%</td><td>86.57%</td></tr>
+          <tr><td><strong>ROC-AUC</strong></td><td><strong>91.02%</strong></td><td><strong>89.50%</strong></td></tr>
+          <tr><td><strong>Raw Records Shared</strong></td><td>242</td><td><strong>0</strong></td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 14px; background: #f0fdfa; padding: 10px 14px; border-radius: 6px; font-size: 11px; border: 1px solid var(--teal); color: var(--teal); font-weight: 600;">
+        Key Finding: FL trades only ~1.6% accuracy for complete data decentralization.
+      </div>
+    </div>
+    <div>
+      <img src="artifacts/figures/metric_comparison.png" class="slide-img" alt="Metric Comparison">
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Federated Learning-Based Disease Prediction System</span>
+    <span>Slide 7 / 12</span>
+  </div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide-container" id="slide-8">
+  <div class="slide-category">Training Dynamics</div>
+  <div class="slide-title">Federated Convergence Dynamics</div>
+  <div class="grid-2">
+    <div>
+      <img src="artifacts/figures/accuracy_by_round.png" class="slide-img" alt="Accuracy by Round">
+    </div>
+    <div>
+      <img src="artifacts/figures/loss_by_round.png" class="slide-img" alt="Loss by Round">
+    </div>
+  </div>
+  <div style="margin-top: 12px; font-size: 12px; color: var(--slate); line-height: 1.4;">
+    <strong>Observations:</strong> Rapid convergence from 54.1% baseline to 85.25% in Round 1. Global log-loss dropped smoothly from 0.6931 to 0.4072 by Round 4, reaching stable parameter consensus across hospitals.
+  </div>
+  <div class="slide-footer">
+    <span>Federated Learning-Based Disease Prediction System</span>
+    <span>Slide 8 / 12</span>
+  </div>
+</div>
+
+<!-- SLIDE 9 -->
+<div class="slide-container" id="slide-9">
+  <div class="slide-category">Clinical Evaluation</div>
+  <div class="slide-title">Confusion Matrix & Clinical Discrimination</div>
+  <div class="grid-2">
+    <div>
+      <img src="artifacts/figures/confusion_matrix.png" class="slide-img" alt="Confusion Matrix">
+    </div>
+    <div class="card">
+      <h3>Clinical Interpretation</h3>
+      <ul>
+        <li><strong>High Sensitivity (87.88%):</strong> Correctly flags 29 of 33 diseased patients, critical for preventing missed cardiac events.</li>
+        <li><strong>High Precision (85.29%):</strong> Prevents unnecessary invasive catheterizations and angiographies.</li>
+        <li><strong>Balanced Errors:</strong> Only 4 false negatives and 5 false positives across the 61 unseen test cases.</li>
+        <li><strong>Mirror Profile:</strong> Federated matrix closely tracks centralized benchmark.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Federated Learning-Based Disease Prediction System</span>
+    <span>Slide 9 / 12</span>
+  </div>
+</div>
+
+<!-- SLIDE 10 -->
+<div class="slide-container" id="slide-10">
+  <div class="slide-category">Demonstration</div>
+  <div class="slide-title">Interactive Streamlit Web Dashboard</div>
+  <div class="grid-3" style="margin-top: 10px;">
+    <div class="card">
+      <h3>🏠 Home</h3>
+      <p style="font-size: 11px;">Workflow diagrams, data isolation principles, and project goals.</p>
+    </div>
+    <div class="card">
+      <h3>🩺 Risk Prediction</h3>
+      <p style="font-size: 11px;">Real-time risk scoring using fitted preprocessor and federated model.</p>
+    </div>
+    <div class="card">
+      <h3>🔄 Training Analytics</h3>
+      <p style="font-size: 11px;">Interactive round convergence charts and client metrics.</p>
+    </div>
+    <div class="card">
+      <h3>📊 Model Comparison</h3>
+      <p style="font-size: 11px;">Centralized vs Federated side-by-side metric tables and charts.</p>
+    </div>
+    <div class="card">
+      <h3>🔒 Privacy Analysis</h3>
+      <p style="font-size: 11px;">Threat models, data boundary analysis, and DP-SGD roadmap.</p>
+    </div>
+    <div class="card">
+      <h3>ℹ️ About</h3>
+      <p style="font-size: 11px;">Dataset citations, prototype limitations, and medical disclaimers.</p>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Federated Learning-Based Disease Prediction System</span>
+    <span>Slide 10 / 12</span>
+  </div>
+</div>
+
+<!-- SLIDE 11 -->
+<div class="slide-container" id="slide-11">
+  <div class="slide-category">Security & Privacy</div>
+  <div class="slide-title">Privacy Boundaries & Threat Models</div>
+  <div class="grid-2">
+    <div class="card card-highlight">
+      <h3 style="color: var(--teal);">Guaranteed in Prototype</h3>
+      <ul>
+        <li>Zero raw CSV or patient rows transmitted across the network.</li>
+        <li>Model training strictly isolated within hospital client partitions.</li>
+        <li>Payloads verified to contain only float weight arrays and sample counts.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="color: var(--navy);">Advanced Threat Models</h3>
+      <ul>
+        <li><strong>FL is Not Absolute Privacy:</strong> Gradient inversion or membership inference can theoretically probe model updates.</li>
+        <li><strong>Defense 1 (DP-SGD):</strong> Calibrated Gaussian noise addition bounded by privacy budget (&epsilon;, &delta;).</li>
+        <li><strong>Defense 2 (SecAgg):</strong> Cryptographic multi-party computation so server sees only aggregated sums.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Federated Learning-Based Disease Prediction System</span>
+    <span>Slide 11 / 12</span>
+  </div>
+</div>
+
+<!-- SLIDE 12 -->
+<div class="slide-container dark-slide" id="slide-12">
+  <div class="slide-category">Conclusion</div>
+  <div class="slide-title" style="font-size: 30px;">Summary & Conclusion</div>
+  <div style="margin-top: 20px; line-height: 1.8; font-size: 14px; color: #e2e8f0;">
+    <p>✔ <strong>Feasibility Proven:</strong> Simulated hospitals trained a global cardiac model (85.25% Acc, 89.5% ROC-AUC) without data pooling.</p>
+    <p>✔ <strong>Negligible Utility Cost:</strong> Traded ~1.6% accuracy for complete decentralization.</p>
+    <p>✔ <strong>Rigorous Validation:</strong> 12 automated unit and integration tests passing.</p>
+    <p>✔ <strong>Academic Prototype:</strong> Demonstrates privacy-preserving collaboration; not for clinical diagnosis.</p>
+  </div>
+  <div style="margin-top: 30px; font-size: 22px; font-weight: bold; color: #38bdf8;">
+    Thank You! Questions & Discussion Welcome.
+  </div>
+  <div class="slide-footer">
+    <span>Federated Learning-Based Disease Prediction System</span>
+    <span>Slide 12 / 12</span>
+  </div>
+</div>
+
+<script>
+  let currentSlide = 1;
+  const totalSlides = 12;
+
+  function showSlide(n) {
+    document.querySelectorAll('.slide-container').forEach(s => s.classList.remove('active'));
+    currentSlide = (n > totalSlides) ? 1 : (n < 1) ? totalSlides : n;
+    const slide = document.getElementById(`slide-${currentSlide}`);
+    if (slide) slide.classList.add('active');
+    document.getElementById('slideCounter').innerText = `Slide ${currentSlide} / ${totalSlides}`;
+  }
+
+  function nextSlide() { showSlide(currentSlide + 1); }
+  function prevSlide() { showSlide(currentSlide - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') nextSlide();
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+  });
+</script>
+</body>
+</html>
